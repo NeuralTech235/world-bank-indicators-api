@@ -1,0 +1,29 @@
+server:
+  port: 8090
+spring:
+  config:
+    activate:
+      on-profile: local
+  application:
+    name: world-bank-indicators-api
+
+logging:
+  level:
+    .: error
+    org.springframework.web: ERROR
+    br.com.assw.worldbankindicators.api: DEBUG
+
+feign:
+  client:
+      config:
+        default:
+          connectionTimeout: 5000
+          readTimetout: 5000
+          loggerLevel: full
+
+world-bank-indicators-api:
+  getToken:
+    url: http://api.worldbank.org/v2/country/%7BCODIGO_DO_PAIS%7D/indicator/SI.POV.DDAY?format=json
+  queryPolicy:
+    url: http://api.worldbank.org/v2/country?format=json
+
